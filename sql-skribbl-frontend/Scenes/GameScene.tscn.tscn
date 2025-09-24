@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbq4vbao8qlr4"]
+
+[ext_resource type="Script" uid="uid://7gohgmhmd0jm" path="res://ws_client.gd" id="1_ngfi6"]
+
+[node name="GameScene_tscn" type="VBoxContainer"]
+alignment = 1
+script = ExtResource("1_ngfi6")
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="RoundLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Round 1 — 30s left"
+
+[node name="QuestionBox" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="QuestionBox"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 2
+
+[node name="SqlInput" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Type your Query here..."
+
+[node name="RunButton" type="Button" parent="."]
+layout_mode = 2
+text = "Run Query"
+
+[node name="ResultBox" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="ResultBox"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+autowrap_mode = 2

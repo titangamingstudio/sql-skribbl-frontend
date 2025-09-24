@@ -1,0 +1,68 @@
+extends Node
+
+var ws := WebSocketPeer.new()
+var connected := false
+
+@onready var status_label := $StatusLabel
+@onready var question_label := $QuestionLabel
+@onready var sql_input := $SqlInput
+@onready var run_button := $RunButton
+
+func _ready():
+	status_label.text = "Connecting..."
+	var err = ws.connect_to_url("ws://127.0.0.1:3000")
+	if err != OK:
+		status_label.text = "Unable to connect!"
+	set_process(true)
+
+	# Connect RunButton pressed
+	run_button.pressed.connect(_on_run_button_pressed)
+
+func _process(_delta):
+	ws.poll()
+
+	var status = ws.get_ready_state()
+
+	if status == WebSocketPeer.STATE_OPEN and not connected:
+		connected = true
+		status_label.text = "Connected to server!"
+
+	elif status == WebSocketPeer.STATE_CLOSED:
+		status_label.text = "Connection closed"
+
+	while ws.get_available_packet_count() > 0:
+		var pkt = ws.get_packet().get_string_from_utf8()
+		_on_message(pkt)
+
+func _on_message(msg):
+	var json = JSON.new()
+	var err = json.parse(msg)
+
+	if err == OK:
+		var obj = json.data
+
+		# Show question text
+		if obj.has("type") and obj.type == "question":
+			question_label.text = obj.text
+
+		# Show validation result
+		elif obj.has("type") and obj.type == "validation_result":
+			var result_label = $ResultLabel
+			if obj.verdict == "ok":
+				# Show rows if query worked
+				var rows_text = ""
+				for row in obj.rows:
+					rows_text += str(row) + "\n"
+				result_label.text = "✅ Correct!\n" + rows_text
+			else:
+				# Show error if query failed
+				result_label.text = "❌ Error: " + obj.message
+	else:
+		print("JSON parse error:", err)
+
+func _on_run_button_pressed():
+	if not connected:
+		return
+	var payload = {"type":"submit_sql", "sql": sql_input.text}
+	var txt = JSON.stringify(payload)
+	ws.send_text(txt)
