@@ -4,9 +4,10 @@ var ws := WebSocketPeer.new()
 var connected := false
 
 @onready var status_label := $StatusLabel
-@onready var question_label := $QuestionLabel
+@onready var question_label := $QuestionBox/QuestionLabel
 @onready var sql_input := $SqlInput
 @onready var run_button := $RunButton
+@onready var result_label := $ResultBox/ResultLabel
 
 func _ready():
 	status_label.text = "Connecting..."
@@ -34,7 +35,7 @@ func _process(_delta):
 		var pkt = ws.get_packet().get_string_from_utf8()
 		_on_message(pkt)
 
-func _on_message(msg):
+func _on_message(msg: String) -> void:
 	var json = JSON.new()
 	var err = json.parse(msg)
 
@@ -43,11 +44,10 @@ func _on_message(msg):
 
 		# Show question text
 		if obj.has("type") and obj.type == "question":
-			question_label.text = obj.text
+			question_label.text = str(obj.text)
 
 		# Show validation result
 		elif obj.has("type") and obj.type == "validation_result":
-			var result_label = $ResultLabel
 			if obj.verdict == "ok":
 				# Show rows if query worked
 				var rows_text = ""
@@ -56,13 +56,16 @@ func _on_message(msg):
 				result_label.text = "✅ Correct!\n" + rows_text
 			else:
 				# Show error if query failed
-				result_label.text = "❌ Error: " + obj.message
+				result_label.text = "❌ Error: " + str(obj.message)
 	else:
 		print("JSON parse error:", err)
 
-func _on_run_button_pressed():
+func _on_run_button_pressed() -> void:
 	if not connected:
 		return
-	var payload = {"type":"submit_sql", "sql": sql_input.text}
+	var payload = {
+		"type": "submit_sql",
+		"sql": sql_input.text
+	}
 	var txt = JSON.stringify(payload)
 	ws.send_text(txt)
