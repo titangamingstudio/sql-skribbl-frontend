@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://5ojlcrj1g5qc"]
+
+[ext_resource type="Script" uid="uid://c10sm8ayjrgsg" path="res://Scripts/join_game.gd" id="1_x5ato"]
+
+[node name="JoinGame" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_x5ato")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Username_input" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Number_of_rounds" type="SpinBox" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Time_per_round_in_seconds" type="SpinBox" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"

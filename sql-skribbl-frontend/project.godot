@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="sql-skribbl-frontend"
-run/main_scene="uid://dbq4vbao8qlr4"
+run/main_scene="uid://b7252r74qqke3"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
 
 [rendering]
 

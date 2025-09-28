@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbctyis4mdp64"]
+
+[ext_resource type="Script" uid="uid://de2simypvnsxx" path="res://Scripts/difficulty_menu.gd" id="1_s2ra4"]
+
+[node name="DifficultyMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_s2ra4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Beginner" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Beginner"
+
+[node name="Intermediate" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Intermediate"
+
+[node name="Advanced" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Advanced"
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"

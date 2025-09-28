@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbq4vbao8qlr4"]
 
-[ext_resource type="Script" uid="uid://7gohgmhmd0jm" path="res://ws_client.gd" id="1_ngfi6"]
+[ext_resource type="Script" uid="uid://7gohgmhmd0jm" path="res://Scripts/ws_client.gd" id="1_2wl7v"]
 
 [node name="GameScene_tscn" type="VBoxContainer"]
 alignment = 1
-script = ExtResource("1_ngfi6")
+script = ExtResource("1_2wl7v")
 
 [node name="StatusLabel" type="Label" parent="."]
 layout_mode = 2
