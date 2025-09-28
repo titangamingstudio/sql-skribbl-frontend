@@ -11,7 +11,7 @@ func _select_difficulty(diff: String):
 	chosen_difficulty = diff
 	# Store difficulty in autoload (global state)
 	Global.selected_difficulty = diff
-	get_tree().change_scene_to_file("res://scenes/JoinGame.tscn")
+	get_tree().change_scene_to_file("res://Scenes/JoinGame.tscn")
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://scenes/PlayMenu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/PlayMenu.tscn")

@@ -16,4 +16,4 @@ func _on_start_pressed():
 	get_tree().change_scene_to_file("res://scenes/GameScene.tscn")
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://scenes/DifficultyMenu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/DifficultyMenu.tscn")
